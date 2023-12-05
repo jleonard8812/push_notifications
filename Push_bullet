@@ -1,0 +1,20 @@
+from pushbullet import Pushbullet
+import schedule
+import time
+
+
+# api_key = 'o.gxOfwrWoOwbdrlCvYCYSYWxMhlTvgY38' #johns computer
+api_key = 'o.g3fb3SPBIZe3pCZPhRXBW70t6bGBL096'
+pb = Pushbullet(api_key)
+devicename = 'Chrome-brittany'
+target_device = next(device for device in pb.devices if device.nickname == devicename)
+
+def job():
+    push = pb.push_note("It's Beanushole time!", "This is a reminder to scratch that perfect lil fupy fup!", device=target_device)
+    
+
+schedule.every(2).minutes.do(job)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1) 
